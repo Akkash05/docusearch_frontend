@@ -1,0 +1,66 @@
+<div>
+  <div class="header">
+    <div class="header-bar d-flex align-items-center px-3">
+      <div class="search-icon mb-2">
+        <i class="fas fa-search-plus"></i>
+      </div>
+      <div class="app-header align-items-center">
+        <h5>{{title}}</h5>
+      </div>
+    </div>
+  </div>
+
+  <div *ngIf="successMessage" class="alert alert-success">
+    <strong>Success!</strong> {{successMessage}}
+  </div>
+
+  <div *ngIf="errorMessage" class="alert alert-danger">
+    <strong>Error!</strong> {{errorMessage}}
+  </div>
+
+  <div class="container mt-5">
+    <div class="row">
+      <div class="col-6">
+        <div class="text-center mb-4">
+          <button class="btn btn-primary w-100" (click)="authenticateWithDropbox()" [disabled]="isAuthenticated"
+            data-toggle="tooltip" data-placement="top"
+            title="This will redirect you to Dropbox for authentication and then automatically bring you back to the application."><i
+              class="fab fa-dropbox" aria-hidden="true"></i>
+            Dropbox</button>
+        </div>
+        <div class="mb-4">
+          <form [formGroup]="contentSearchForm" autocomplete="off">
+            <textarea class="form-control" rows="8" formControlName="search_area"
+              placeholder="Search Your Content...."></textarea>
+          </form>
+        </div>
+        <div>
+          <button class="btn btn-success w-100" (click)="searchContent()" [disabled]="isSearching"><i
+              class="fas fa-search" aria-hidden="true"></i>
+            Search</button>
+        </div>
+      </div>
+      <div class="col-6">
+
+        <div class="mb-4">
+          <select class="form-control" (change)="chooseFile($event)" [disabled]="isfileDropdown">
+            <option *ngFor="let option of dropdownOptions" [value]="option.value">{{ option.label }}</option>
+          </select>
+        </div>
+
+        <div class="mb-4">
+          <div>
+            <textarea class="form-control" rows="8" [(ngModel)]="resultAreaContent"
+              [disabled]="isResultArea"></textarea>
+          </div>
+        </div>
+
+        <div>
+          <button class="btn btn-danger w-100" (click)="reset()" [disabled]="isSearching"><i class="fas fa-refresh"
+              aria-hidden="true"></i>
+            Reset</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
